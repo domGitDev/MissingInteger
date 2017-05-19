@@ -1,5 +1,3 @@
-
-
 def find_missing(A, m, B, n):
 	""" This function find missing numbers in A using B
 		param A: list
@@ -10,11 +8,16 @@ def find_missing(A, m, B, n):
 	"""
 	
 	def validate():
+		def check_type(obj):
+			if not isinstance(obj, (list, tuple, set)):
+				return False
+			return True
+			
 		if not A or not B:
 			return False
 		if m > n or m < 0 or n < 0:
 			return False 
-		if not isinstance(A, (list, tuple, set)):
+		if not check_type(A) or not check_type(B):
 			raise TypeError(
 				'Expected list or tuple. A is %s and B is %s.' 
 				% (type(A), type(B)))
@@ -27,6 +30,7 @@ def find_missing(A, m, B, n):
 	B = sorted(B)
 	missing = set()
 	j = 0
+	prev = None
 		
 	for val in B:
 		if j > m:
@@ -39,5 +43,6 @@ def find_missing(A, m, B, n):
 		else:
 			j += 1
 			 
-	return sorted(mssing)
-
+	return sorted(missing)
+	
+	
